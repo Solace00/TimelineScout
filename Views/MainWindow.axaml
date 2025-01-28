@@ -1,21 +1,29 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:TimeLineScout.ViewModels"
+        xmlns:vm="using:TimelineScout.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vlc="using:LibVLCSharp.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="TimeLineScout.Views.MainWindow"
+        x:Class="TimelineScout.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="TimeLineScout">
+        Title="TimelineScout">
 
   <Grid>
+    <!-- Define rows for the Grid -->
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <!-- Video playback area -->
+      <RowDefinition Height="Auto" />
+      <!-- Buttons -->
+    </Grid.RowDefinitions>
+
     <!-- Video playback area -->
-    <vlc:VideoView x:Name="VideoPlayer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+    <vlc:VideoView x:Name="VideoPlayer" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
     <!-- Controls for playback -->
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10">
       <Button Command="{Binding PlayCommand}" Content="Play" Width="75" Height="30" Margin="5"/>
       <Button Command="{Binding PauseCommand}" Content="Pause" Width="75" Height="30" Margin="5"/>
       <Button Command="{Binding StopCommand}" Content="Stop" Width="75" Height="30" Margin="5"/>

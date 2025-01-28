@@ -2,10 +2,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using LibVLCSharp.Avalonia;
+using System;
 using TimelineScout.ViewModels;
-using TimeLineScout.ViewModels;
 
-namespace TimeLineScout.Views
+namespace TimelineScout.Views
 {
     public partial class MainWindow : Window
     {
@@ -16,8 +16,13 @@ namespace TimeLineScout.Views
             this.AttachDevTools();
 #endif
 
-            // Pass the VideoView control to the ViewModel
+            // Find the VideoView control and pass it to the ViewModel
             var videoView = this.FindControl<VideoView>("VideoPlayer");
+            if (videoView == null)
+            {
+                throw new InvalidOperationException("VideoPlayer control not found.");
+            }
+
             DataContext = new MainWindowViewModel(videoView);
         }
 

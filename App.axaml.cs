@@ -1,10 +1,13 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using TimeLineScout.ViewModels;
-using TimeLineScout.Views;
+using LibVLCSharp.Avalonia;
+using System;
+using TimelineScout.ViewModels;
+using TimelineScout.Views;
 
-namespace TimeLineScout
+namespace TimelineScout
 {
     public partial class App : Application
     {
@@ -20,8 +23,14 @@ namespace TimeLineScout
                 var mainWindow = new MainWindow(); // Create the MainWindow
                 desktop.MainWindow = mainWindow; // Set it as the main window
 
-                // Pass the MainWindow to the ViewModel
-                mainWindow.DataContext = new MainWindowViewModel(mainWindow.VideoPlayer);
+                // Find the VideoView control and pass it to the ViewModel
+                var videoView = mainWindow.FindControl<VideoView>("VideoPlayer");
+                if (videoView == null)
+                {
+                    throw new InvalidOperationException("VideoPlayer control not found.");
+                }
+
+                mainWindow.DataContext = new MainWindowViewModel(videoView); // Set the DataContext
             }
 
             base.OnFrameworkInitializationCompleted();

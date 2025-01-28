@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace TimeLineScout
+namespace TimelineScout
 {
     internal static class FFmpegHelper
     {

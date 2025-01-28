@@ -2,7 +2,7 @@
 using Avalonia;
 using TimelineScout;
 
-namespace TimeLineScout
+namespace TimelineScout
 {
     internal sealed class Program
     {
